@@ -8,7 +8,7 @@ This README shows you how to setup your first Azure function. You can follow the
 - Azure Function Core Tools
 - ESLIT + Prettier
 - Vitest
-- Nodemon & Concurrently 1
+- Nodemon & Concurrently
 
 ## Local Development
 
@@ -18,17 +18,17 @@ Because of the nature of `typescript` (TypeScript being a transpiled language) t
 
 First of install the Azure Function Core tool with your favourite package manager:
 
-```terminal
+```console
 npm i -g azure-functions-core-tools@4 --unsafe-perm true
 ```
 
 The Azure Functions Core Tools provide a local development experience for creating, developing, testing, running, and debugging Azure Functions.
 
 ### Versions
-**v1** (v1.x branch): Requires .NET 4.7.1 Windows Only
-**v2** (dev branch): Self-contained cross-platform package
-**v3**: (v3.x branch): Self-contained cross-platform package
-**v4**: (v4.x branch): Self-contained cross-platform package **(recommended)**
+- **v1** (v1.x branch): Requires .NET 4.7.1 Windows Only
+- **v2** (dev branch): Self-contained cross-platform package
+- **v3**: (v3.x branch): Self-contained cross-platform package
+- **v4**: (v4.x branch): Self-contained cross-platform package **(recommended)**
 
 ### Check your version
 
@@ -54,7 +54,7 @@ Use the following command to setup a new azure function in your code base.
 func new --name MyFunction --template "HTTP trigger"
 ```
 
-The `func` command has some build in templates you can use. Just replace the `HTTP Trigger` template with one of the template below. These templates are based on Node js. The func command also supports other languages like Python and C#.
+The `func` command has some build in templates you can use. Just replace the `HTTP Trigger` template with one of the template below. These templates are based on Node js. The func command also supports other languages like `Python` and `C#`.
 
 - BlobTrigger - Processes Azure Storage blobs when they're added to a container. You might use this function for image resizing.
 - CosmosDBTrigger - Respond to events in an Azure Cosmos DB.
@@ -67,6 +67,7 @@ The `func` command has some build in templates you can use. Just replace the `HT
 - TimerTrigger - Execute cleanup or other batch tasks on a predefined schedule.
 
 ## Authentication
+
 This Node.js Azure Function protects its own API (HTTP trigger) with the combination of the built-in authentication & authorization feature of Azure Functions (commonly known as "Easy Auth"). 
 
 When you're using Azure App Service Authentication/Authorization (Easy Auth), you do not need to manually decode the bearer token in your function code. [Read the microsoft docs](https://learn.microsoft.com/nl-nl/azure/app-service/overview-authentication-authorization)
@@ -83,9 +84,10 @@ Hello from the API server
 - A valid token with the proper scope of `email` will result in the `Hello from the API server` message.
 
 ## Accessing user data
+
 Easy Auth automatically intercepts incoming requests to your application, validates the authentication token, and if the token is valid, it adds user information to the request headers. This user information includes details like the user's ID and the user's Azure AD ID token.
 
-In your Azure Function, you can access user information directly from the headers. For example, the **`X-MS-CLIENT-PRINCIPAL-ID`** header contains the user's ID, and the **`X-MS-TOKEN-AAD-ID-TOKEN`** header contains the user's Azure AD ID token.
+In your Azure Function, you can access user information directly from the headers. For example, the `X-MS-CLIENT-PRINCIPAL-ID` header contains the user's ID, and the `X-MS-TOKEN-AAD-ID-TOKEN` header contains the user's Azure AD ID token.
 
 ```typescript
 module.exports = async function (context, req) {
@@ -108,6 +110,7 @@ module.exports = async function (context, req) {
 ```
 
 ## Testing authentication locally
+
 At the time of this writing, Function app authentication does not support a local development experience that has parity with the on-Azure runtime. You can still execute this locally with `func start` but the authentication functionality provided by the Function app service on Azure Authentication will not be invoked. 
 
 However, you can emulate the behavior of Easy Auth in your local development environment by manually adding the headers that Easy Auth would add to your requests. For example, you can add the `X-MS-CLIENT-PRINCIPAL-ID` and `X-MS-TOKEN-AAD-ID-TOKEN` headers to your requests when you're testing your functions locally.
