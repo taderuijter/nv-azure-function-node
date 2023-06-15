@@ -1,0 +1,25 @@
+{
+  "name": "nprc-node-boilerplate",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "build": "tsc",
+    "watch": "tsc -w",
+    "start": "func start",
+    "lint": "eslint '*/**/*.{js,ts}' --quiet --fix",
+    "test:unit": "vitest"
+  },
+  "devDependencies": {
+    "@azure/functions": "^3.5.1",
+    "@types/node": "14.x",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.8",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.0.2",
+    "vitest": "^0.32.0"
+  }
+}
