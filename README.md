@@ -18,7 +18,7 @@ Because of the nature of `typescript` (TypeScript being a transpiled language) t
 
 First of install the Azure Function Core tool with your favourite package manager:
 
-```console
+```terminal
 npm i -g azure-functions-core-tools@4 --unsafe-perm true
 ```
 
@@ -34,15 +34,15 @@ The Azure Functions Core Tools provide a local development experience for creati
 
 Check your terminal if you have the right version installed using the following command.
 
-```console
+```terminal
 func -v
 ```
 
 ## Boilerplate
 
-You can pull the project from the following Github repo.
+You can pull the project from the following Github repo. Don't forget to install dependencies `npm install`.
 
-```console
+```teminal
 git clone https://github.com/taderuijter/nv-azure-function-node.git
 ```
 
@@ -50,11 +50,11 @@ git clone https://github.com/taderuijter/nv-azure-function-node.git
 
 Use the following command to setup a new azure function in your code base. 
 
-```console
+```terminal
 func new --name MyFunction --template "HTTP trigger"
 ```
 
-The `func` command has some build in templates you can use. Just replace the `HTTP Trigger` template with one of the template below. These templates are based on Node js. The func command also supports other languages like `Python` and `C#`.
+The `func` command has some build in templates you can use. Just replace the `HTTP Trigger` template with one of the template below. These templates are based on `Node js`. The func command also supports other languages like `Python` and `C#`.
 
 - BlobTrigger - Processes Azure Storage blobs when they're added to a container. You might use this function for image resizing.
 - CosmosDBTrigger - Respond to events in an Azure Cosmos DB.
@@ -111,11 +111,11 @@ module.exports = async function (context, req) {
 
 ## Testing authentication locally
 
-At the time of this writing, Function app authentication does not support a local development experience that has parity with the on-Azure runtime. You can still execute this locally with `func start` but the authentication functionality provided by the Function app service on Azure Authentication will not be invoked. 
+At the time of writing, Function app authentication does not support a local development experience that has parity with the on-Azure runtime. You can still execute this locally with `func start` but the authentication functionality provided by the Function app service on Azure Authentication will not be invoked. 
 
 However, you can emulate the behavior of Easy Auth in your local development environment by manually adding the headers that Easy Auth would add to your requests. For example, you can add the `X-MS-CLIENT-PRINCIPAL-ID` and `X-MS-TOKEN-AAD-ID-TOKEN` headers to your requests when you're testing your functions locally.
 
-Another approach is to create a middleware function that simulates Easy Auth by checking for a bearer token in the **`Authorization`** header of the request, decoding and validating the token, and adding the user information to the headers. You can use this middleware function when you're testing your functions locally, and disable it when you're running your functions in Azure.
+Another approach is to create a middleware function that simulates Easy Auth by checking for a bearer token in the `Authorization` header of the request, decoding and validating the token, and adding the user information to the headers. You can use this middleware function when you're testing your functions locally, and disable it when you're running your functions in Azure.
 
 Please note that these approaches only simulate the behavior of Easy Auth and are not a perfect match. For example, they don't handle token refresh, and they might not support all authentication providers. For the most accurate testing, you should deploy your functions to Azure and test them there.
 
@@ -132,7 +132,6 @@ Use these settings in your app registration.
 | **Name**                       | `node-azure-function-api`                                            | Suggested value for this sample. <br/> You can change the app name at any time. |
 | **Supported account types**    | **Accounts in this organizational directory only (Single tenant)**   | Suggested value for this sample.                                                |
 | **Platform type**              | _None_                                                               | No redirect URI required; don't select a platform.                              |
-| **Scopes defined by this API** | **Scope name**: `Greeting.Read`<br/>**Who can consent?**: **Admins and users**<br/>**Admin consent display name**: `Read API Greetings`<br/>**Admin consent description**: `Allows the user to see greetings from the API.`<br/>**User consent display name**: `Read API Greetings`<br/>**User consent description**: `Allows you to see greetings from the API.`<br/>**State**: **Enabled** | Required scope for this sample. |
 
 > :information_source: **Bold text** in the table matches (or is similar to) a UI element in the Azure portal, while `code formatting` indicates a value you enter into a text box in the Azure portal.
 
